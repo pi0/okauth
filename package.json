@@ -17,8 +17,9 @@
   },
   "homepage": "https://github.com/fandogh/okauth#readme",
   "dependencies": {
-    "jsonwebtoken": "latest",
+    "bak": "latest",
     "bcryptjs": "latest",
-    "bak": "latest"
+    "jsonwebtoken": "latest",
+    "minio": "latest"
   }
 }
