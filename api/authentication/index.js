@@ -1,7 +1,7 @@
 import Joi from 'joi';
 import Boom from 'boom';
 import {oauth_ro, user_info} from '../../lib/authentication';
-import {Controller, get, post, validate} from '../../../bak/modules/controller'
+import {Controller, get, post, validate} from 'bak/modules/controller'
 
 /**
  * Authentication API

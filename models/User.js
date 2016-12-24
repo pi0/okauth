@@ -1,5 +1,5 @@
-import {Model} from '../../bak/modules/mongoose';
-import {url} from '../../bak/modules/minio';
+import Model from 'bak/modules/mongoose/model';
+import {url} from 'bak/modules/minio';
 
 class User extends Model {
 
