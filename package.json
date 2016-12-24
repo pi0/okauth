@@ -1,6 +1,6 @@
 {
   "name": "okauth",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "OkAuth",
   "main": "index.js",
   "scripts": {
@@ -18,7 +18,7 @@
   "homepage": "https://github.com/fandogh/okauth#readme",
   "dependencies": {
     "jsonwebtoken": "latest",
-	"bcryptjs": "latest",
+    "bcryptjs": "latest",
     "bak": "latest"
   }
 }
