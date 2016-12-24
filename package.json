@@ -1,6 +1,6 @@
 {
   "name": "okauth",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "OkAuth",
   "main": "index.js",
   "scripts": {
