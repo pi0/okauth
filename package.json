@@ -1,0 +1,24 @@
+{
+  "name": "okauth",
+  "version": "0.0.1",
+  "description": "OkAuth",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fandogh/okauth.git"
+  },
+  "author": "Pooya Parsa <pooya@pi0.ir>",
+  "license": "MPL-2.0",
+  "bugs": {
+    "url": "https://github.com/fandogh/okauth/issues"
+  },
+  "homepage": "https://github.com/fandogh/okauth#readme",
+  "dependencies": {
+    "jsonwebtoken": "latest",
+	"bcryptjs": "latest",
+    "bak": "latest"
+  }
+}
