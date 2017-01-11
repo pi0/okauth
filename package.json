@@ -1,6 +1,6 @@
 {
   "name": "okauth",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "author": "Pooya Parsa <pooya@pi0.ir>",
   "license": "MIT",
   "main": "index.js",
