@@ -75,12 +75,16 @@ const plugin = (server, auth_options) => {
 
                 let user_id = token_decoded.s;
 
-                return reply.continue({
-                    credentials: {user_id},
-                    artifacts: async() => {
-                        return User.findById(user_id);
-                    },
+                User.findById(user_id).then((user) => {
+                    reply.continue({
+                        credentials: user,
+                        artifacts: token,
+                    })
+                }).catch((err) => {
+                    console.error(err);
+                    return reply(Boom.unauthorized('User not found'));
                 });
+
             }).catch((err) => {
                 console.error(err);
                 return reply(Boom.unauthorized('Manipulated token'));

@@ -12,10 +12,10 @@ class AuthController extends Controller {
         super('/api/auth', {auth: false});
         this.auth_options = options;
 
-        if (this.auth_options.client)
-            this.init_client().catch(e => {
-                if (e) console.error(e);
-            });
+        // if (this.auth_options.client)
+        //     this.init_client().catch(e => {
+        //         if (e) console.error(e);
+        //     });
     }
 
     async init_client() {
@@ -75,14 +75,9 @@ class AuthController extends Controller {
         auth: {mode: 'required'},
     })
     async profile(request, reply) {
-        let {isAuthenticated, credentials, artifacts} = request.auth;
-
-        if (!isAuthenticated)
-            return reply(Boom.unauthorized('Not authenticated'));
-
-        let profile = await artifacts();
-
-        reply({profile});
+        reply({
+            profile: request.auth.credentials
+        });
     }
 
     @post('/profile')

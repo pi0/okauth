@@ -1,7 +1,6 @@
 import AuthPlugin from './token'
 import AuthController from '../controllers/auth'
 
-
 exports.register = (server, options, next) => {
     // Define our auth scheme
     server.auth.scheme('okauth', AuthPlugin);
