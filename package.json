@@ -1,25 +1,23 @@
 {
   "name": "okauth",
   "version": "0.0.4",
-  "description": "OkAuth",
+  "author": "Pooya Parsa <pooya@pi0.ir>",
+  "license": "MIT",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "links": "yarn link bak okauth",
+    "postinstall":"yarn links"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/fandogh/okauth.git"
-  },
-  "author": "Pooya Parsa <pooya@pi0.ir>",
-  "license": "MPL-2.0",
-  "bugs": {
-    "url": "https://github.com/fandogh/okauth/issues"
-  },
-  "homepage": "https://github.com/fandogh/okauth#readme",
   "dependencies": {
     "bak": "latest",
     "bcryptjs": "latest",
+    "config": "latest",
     "jsonwebtoken": "latest",
-    "minio": "latest"
+    "hapi-rbac": "latest",
+    "openid-client": "latest"
+  },
+  "optionalDependencies": {
+    "minio": "latest",
+    "sharp": "latest"
   }
 }

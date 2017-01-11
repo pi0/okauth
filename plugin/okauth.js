@@ -1,11 +1,17 @@
-import auth_plugin from './auth';
+import AuthPlugin from './token'
+import AuthController from '../controllers/auth'
+
 
 exports.register = (server, options, next) => {
     // Define our auth scheme
-    server.auth.scheme('okauth', auth_plugin);
+    server.auth.scheme('okauth', AuthPlugin);
 
     // Register as default strategy
     server.auth.strategy('auth', 'okauth', 'required', options);
+
+    // Register Auth API Routes
+    const authController = new AuthController(options);
+    server.route(authController.routes);
 
     // Enforce roles, if options provided
     if (options.acl) {
@@ -17,8 +23,6 @@ exports.register = (server, options, next) => {
             next();
         });
     }
-    else
-        next();
 
     // Go on
     next();

@@ -1,6 +1,8 @@
 import Boom from "boom";
 import Hoek from "hoek";
 import Joi from "joi";
+import User from "../models/user";
+import {jwt_verify} from '../utils/security';
 
 // Based on https://github.com/johnbrett/hapi-auth-bearer-token
 
@@ -24,16 +26,13 @@ const schema = Joi.object().keys({
     connection: Joi.string(),
 }).unknown(true);
 
-const plugin = (server, options) => {
+const plugin = (server, auth_options) => {
 
-    Hoek.assert(options, 'Missing bearer auth strategy options');
+    Hoek.assert(auth_options, 'Missing bearer auth strategy auth_options');
 
-    const settings = Hoek.applyToDefaults(defaults, options);
+    const settings = Hoek.applyToDefaults(defaults, auth_options);
 
     Joi.assert(settings, schema);
-
-    let AuthClient = require('./client').default;// Lazy better!
-    const authClient = new AuthClient(settings);
 
     const authenticate = (request, reply) => {
         try {
@@ -45,7 +44,6 @@ const plugin = (server, options) => {
                 && !authorization
                 && request.state[settings.accessTokenName]) {
                 authorization = settings.tokenType + ' ' + request.state[settings.accessTokenName];
-
             }
 
             // Fallback 2 : URL Query
@@ -56,7 +54,7 @@ const plugin = (server, options) => {
                 delete request.query[settings.accessTokenName];
             }
 
-            // Fallback 3: Throw Error
+            // Fallback 3 : Throw Error
             if (!authorization) {
                 return reply(Boom.unauthorized(null, settings.tokenType));
             }
@@ -69,24 +67,27 @@ const plugin = (server, options) => {
                 return reply(Boom.unauthorized(null, settings.tokenType));
             }
 
-            // Now check real token
+            // Now use token
             const token = parts[1];
+            jwt_verify(token, auth_options.client.client_secret).then((token_decoded) => {
+                // Verify token is valid
+                if (!token_decoded) return reply(Boom.unauthorized('Invalid token'));
 
-            // Get user from auth client
-            authClient.user(token).then(credentials => {
-                if (!credentials) {
-                    return reply(Boom.badRequest(),
-                        {credentials, log: {tags: ['auth', 'bearer'], data: token}});
-                }
+                let user_id = token_decoded.s;
 
                 return reply.continue({
-                    credentials,
-                    // artifacts: null,
+                    credentials: {user_id},
+                    artifacts: async() => {
+                        return User.findById(user_id);
+                    },
                 });
+            }).catch((err) => {
+                console.error(err);
+                return reply(Boom.unauthorized('Manipulated token'));
             });
         } catch (e) {
             console.error(e);
-            reply(Boom.internal());
+            reply(Boom.unauthorized("General error while authenticating"));
         }
     };
 

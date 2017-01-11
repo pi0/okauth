@@ -1,2 +1,0 @@
-# okauth
-Auth System
