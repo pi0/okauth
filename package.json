@@ -1,12 +1,12 @@
 {
   "name": "okauth",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "author": "Pooya Parsa <pooya@pi0.ir>",
   "license": "MIT",
   "main": "index.js",
   "scripts": {
     "links": "yarn link bak okauth",
-    "postinstall":"yarn links"
+    "postinstall": "yarn links"
   },
   "dependencies": {
     "bak": "latest",
