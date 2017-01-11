@@ -9,11 +9,11 @@
     "postinstall": "yarn links"
   },
   "dependencies": {
-    "bak": "latest",
+    "bak": "^0.0.7",
     "bcryptjs": "latest",
     "config": "latest",
-    "jsonwebtoken": "latest",
     "hapi-rbac": "latest",
+    "jsonwebtoken": "latest",
     "openid-client": "latest"
   },
   "optionalDependencies": {
